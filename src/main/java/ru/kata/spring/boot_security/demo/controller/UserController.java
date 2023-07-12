@@ -10,11 +10,11 @@ public class UserController {
 
     @GetMapping("/admin")
     public String adminPage() {
-        return "index";
+        return "admin";
     }
 
     @GetMapping("/user")
     public String userPage() {
-        return "index";
+        return "user";
     }
 }
