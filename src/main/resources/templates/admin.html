@@ -2,11 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Admin Panel</title>
 </head>
 <body>
-<h1>Admin, welcome spring boot security page!</h1>
-<a href="/logout">Logout</a>
-
+<h1>All Users</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Age</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Здесь происходит итерация по списку пользователей и заполнение данных в таблице -->
+    <!-- Пример использования Thymeleaf для итерации по списку пользователей -->
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <span th:text="${user.roles}"></span>
+        </td>
+        <td>
+            <a th:href="@{'/edit/' + ${user.id}}">Edit</a>
+        </td>
+        <td>
+            <form th:action="@{'/' + ${user.id}}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    <a href="/logout">Logout</a>
+    </tbody>
+</table>
 </body>
 </html>
